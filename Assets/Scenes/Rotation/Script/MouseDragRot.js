@@ -24,8 +24,6 @@ function Update () {
      
     // Rotate the GameObject
     transform.Rotate(Vector3(-(offsetPos.y/divider),offsetPos.x/divider,0.0), Space.World);
-
-    print(mouseXY);
 }
  
 // Debug Code: Prints the current mouse position
