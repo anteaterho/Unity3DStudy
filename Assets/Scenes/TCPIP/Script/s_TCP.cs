@@ -6,19 +6,21 @@ using System.Net.Sockets;
 
 public class s_TCP : MonoBehaviour 
 {
-	public bool socketReady = false;
+    public string textFieldString;
+
+    public bool socketReady = false;
 	
 	TcpClient mySocket;
 	NetworkStream theStream;
 	StreamWriter theWriter;
 	StreamReader theReader;
-	String Host = "localhost";
-	Int32 Port = 13000; 
+	public String Host = "192.168.203.128";
+	public int Port = 13000; 
 	
 	// Use this for initialization
 	void Start() {
-		
-	}
+
+    }
 	
 	// Update is called once per frame
 	void Update() {
@@ -39,13 +41,18 @@ public class s_TCP : MonoBehaviour
 	}
 	
 	public void writeSocket(string theLine) {
-		if (!socketReady)
+        setupSocket();
+        if (!socketReady)
 			return;
-		// theWriter.Write(theLine);
-		// theWriter.Flush();
-		byte[] bytes = System.Text.Encoding.ASCII.GetBytes(theLine);
-		theStream.Write(bytes, 0, bytes.Length);
-	}
+        //theWriter.Write(theLine);
+        // theWriter.Flush();
+        //byte[] bytes = System.Text.Encoding.ASCII.GetBytes(theLine);
+        byte[] bytes = System.Text.Encoding.ASCII.GetBytes(theLine);
+
+        theStream.Write(bytes, 0, bytes.Length);
+        theWriter.Flush();
+        closeSocket();
+    }
 	
 	//스트링으로 보내는것에 문제가 있어서 바이트로 보낸부분을 추가. 
 	public void writeSocketByte(byte b) {
@@ -78,4 +85,17 @@ public class s_TCP : MonoBehaviour
 			setupSocket();
 		}
 	}
+
+    /*
+    void OnGUI()
+    {
+        textFieldString = GUI.TextField(new Rect(25, 100, 300, 30), textFieldString);
+
+        if (GUI.Button(new Rect(20, 70, 80, 20), "Send"))
+        {
+            //byte[] byteValue = Encoding.UTF8.GetBytes(textFieldString);
+            writeSocket(textFieldString);
+        }
+    }
+    */
 }

@@ -1,16 +1,19 @@
 ﻿using UnityEngine;
 using System;
+using System.Text;
+using System.Net;
 using System.Collections;
 
 public class TcpIpGui : MonoBehaviour {
 
-	private String textFieldString = "Socket Test String";
+	private string textFieldString;
 	private s_TCP myTcp;
 
 	void Awake()
 	{
 		myTcp = gameObject.AddComponent<s_TCP> ();
-	}
+        myTcp.setupSocket();
+    }
 
 	void OnGUI()
 	{
@@ -40,7 +43,8 @@ public class TcpIpGui : MonoBehaviour {
 
             if (GUI.Button(new Rect(20, 70, 80, 20), "Send"))
             {
-                myTcp.writeSocketByte(byte.Parse(textFieldString));
+                //byte[] byteValue = Encoding.UTF8.GetBytes(textFieldString);
+                myTcp.writeSocket(textFieldString);
             }
 
                 if (GUI.Button (new Rect (20, 140, 80, 20), "Disconnect")) {
