@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System;
 
-public class socketScript : MonoBehaviour
+public class SocketScript : MonoBehaviour
 {
     //variables
     private TCPConnection myTCP;
